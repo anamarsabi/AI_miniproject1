@@ -1,0 +1,23 @@
+Ana! Acabo de subir un main actualizado
+Logré meter los nodos de nuestra imagen original y trabajar con ellos. Y encontrar la ruta y funciona bastante bien.
+
+Problemas que tengo:
+No entendí la función que lee el archivo así que cree los edges directamente en el código. Si pudieras hacer una funcion que lea la info
+de los edges o explicarme como funciona sería genial porque de verdad que no entendí ni dos líneas jajajaj
+En el programa tengo un struct location que tiene 4 atributos  
+    double x; ///< Coordinate x
+    double y; ///< Coordinate y
+    int node;
+    bool sorted;
+Así que eso es lo que tendría que leer el fichero.
+
+Otro problema es como meter los edges a los que hay que hacer delivery eso no tengo ni idea de como hacerlo si es leyendo un fichero o  si
+es por linea de comando.
+
+Si quieres probar como funciona el codigo puedes ir a la linea 133 
+vector<location> dlist = {edges[6], edges[5], edges[12]};
+y elegir los edges que quieras con índices de 1 a 12. La salida imprime 
+"ROUTE"
+y te da las coordenadas de las intersecciones por las que pasa
+
+Traté de mantener el resto del código lo mas lógico posible pero sabes que me enredo sola y escribo código demás 
