@@ -33,7 +33,7 @@ int main(int argc, char*argv[])
 {
     if (argc!=2) {
 		cerr<<"Error en el número de argumentos:\n";
-		cerr<<"./location.cpp <fichero>\n";
+		cerr<<"./location <fichero>\n";
 		exit(-1);
 	}
 	vector<location> lista = FromFile(argv[1]); //All locations
@@ -60,7 +60,7 @@ int main(int argc, char*argv[])
     location origin(x,y,n);
     cout<<"Generating route starting by the origin: "<<origin<<"..."<<endl;
     final_route=route(mapa,origin);
-    cout<<"The total distance is: "<<totalDistance(final_route)<<endl;
+    //cout<<"The total distance is: "<<totalDistance(final_route)<<endl;
     cin>>fichero;
     toFile(final_route,fichero);
 }
