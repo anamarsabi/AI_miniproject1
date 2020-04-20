@@ -73,32 +73,32 @@ ostream & operator <<(ostream & os, location & c);
 /**
  * @brief returns distance between two locations
  */
-double d(location a, location b)
+double d(location a, location b);
 
 /**
  * @brief Calculates the sum of distences  between all the cities of a list
  */
-double totalDistance(vector<location> &v)
+double totalDistance(vector<location> &v);
 
 /**
  * @brief Adds all the elements of the vector passed aas a parameter to a queue
  */
-queue<location> toQueue(vector<location> &v)
+queue<location> toQueue(vector<location> &v);
 
 /**
  * @brief Adds all the elements of the queue passed as a parameter to a vector
  *          starting from index 1
  */
-vector<location> toVector(queue<location> &v)
+vector<location> toVector(queue<location> &v);
 
 /**
  * @brief Finds the minimum of 4 elements
  */
-double minimum(double a, double b, double c, double d)
+double minimum(double a, double b, double c, double d);
 
 
 //IMPLEMENTATION
-istream & operator >>(istream & is, ciudad & c) 
+istream & operator >>(istream & is, location & c) 
 {
     double x;
     double y; 
@@ -115,7 +115,7 @@ istream & operator >>(istream & is, ciudad & c)
     return is;
 }
 
-ostream & operator <<(ostream & os, ciudad & c) 
+ostream & operator <<(ostream & os, location & c) 
 {
 	os<<"("<<c.x<<","<<c.y<<")";
 	return os;
@@ -177,6 +177,7 @@ double minimum(double a, double b, double c, double d)
     return mini;
 }
 
+#endif
 
 
 

@@ -6,6 +6,7 @@
 
 #include"location.h"
 
+
 using namespace std;
 
 /**
@@ -41,7 +42,7 @@ int main(int argc, char*argv[])
 	queue<location> final_route;    //Route of intersections to follow
 	string fichero;
 
-    cout<<"Specify locations where to go\n Example of input: 2-5-8-14-22 enter"<<enld;
+    cout<<"Specify locations where to go\n Example of input: 2-5-8-14-22 enter"<<endl;
     string input;
     vector<int> nodes;
     cin>>input;
@@ -65,12 +66,12 @@ int main(int argc, char*argv[])
     toFile(final_route,fichero);
 }
 
-queue<location> route(vector<location> &dlist,const location &c)
+queue<location> route(vector<location> &dlist,const location c)
 {
     //SORTING
 
     //VECTOR TO STORE SORTED LIST
-    vector<location> slist();
+    vector<location> slist;
 
     //DEFINING THE FIRST PLACE (PIZZERIA) AS ORIGIN
     slist.push_back(c);
@@ -291,7 +292,7 @@ void toFile(queue<location> r,string fichero)
 {
     fstream fout;
 	
-	fout.open(fichero);
+	fout.open(fichero.c_str());
 	if (fout) {
 		while (!r.empty()) {
 			fout<<r.front().node<<" "<<r.front().x<<" "<<r.front().y<<endl;
