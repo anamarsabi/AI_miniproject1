@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cmath>
-#include<iostream>
 #include<fstream>
 #include<queue>
 #include<vector>
 #include<string>
 #include<time.h>
+#include<climits>
 
 using namespace std;
 struct location{
@@ -41,7 +41,7 @@ struct location{
 
 double d(location a, location b) {
     return sqrt(pow(a.x-b.x,2)+pow(a.y-b.y,2));
-};
+}
 
 
 
@@ -130,7 +130,10 @@ double minimum(double a, double b, double c, double d){
         cout<<k<<": x: "<<edges[k].x<<", y: "<<edges[k].y<<endl;
     };
 
-    vector<location> dlist = {edges[6], edges[5], edges[12]};
+    vector<location> dlist;
+    dlist.push_back(edges[6]);
+    dlist.push_back(edges[5]);
+    dlist.push_back(edges[12]);
     cout<<"Delivery places"<<endl;
 
     for(size_t i=0; i<dlist.size();i++){
