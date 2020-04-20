@@ -162,22 +162,22 @@ vector<location> toVector(queue<location> &v)
     return aux;
 }
 
-double minimum(double a, double b, double c, double d)
+int minimum(vector<double> &v)
 {
-    double mini=INT_MAX;
-    double aray[4]={a, b, c, d};
-
-    for(int i=0; i<4;i++)
-    {
-        if(aray[i]<mini){
-            mini=aray[i];
+    double mini=v.at(0);
+    int pos;
+    
+    for(int i=1; i<v.size();i++){
+    
+        if(v.at(i)<mini){
+            mini=v.at(i);
+            pos=i;
         }
     }
-
-    return mini;
+    
+    return pos;
 }
 
 #endif
-
 
 
