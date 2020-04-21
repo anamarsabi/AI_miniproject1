@@ -39,17 +39,18 @@ vector<string> splitStrings(string str, char dl);
 //int main(int argc, char*argv[])
 //{
 
-int main(){
-    /*if (argc!=2) {
+int main(int argc, char*argv[]){
+    if (argc!=2) {
 		cerr<<"Error en el número de argumentos:\n";
 		cerr<<"./location <fichero>\n";
 		exit(-1);
-	}*/
-	//vector<location> lista = FromFile(argv[1]); //All locations
+	}
+	vector<location> lista = FromFile(argv[1]); //All locations
 	
 	//AQUI ESTOY METIENDO ALGO QUE HAY QUE QUITAR
 	//We have to create an array of e (edges) with coordinates
     
+    /*
     int size =13;
     
     vector<location> lista(size);
@@ -87,11 +88,13 @@ int main(){
             }
         };
 
+
     for(int k=0; k<13;k++){
 
         cout<<k<<": x: "<<lista[k].x<<", y: "<<lista[k].y<<endl;
     };
 	//AQUI SE ACABA
+    */
 	
 	vector<location> mapa;  //Locations where we want to go
 	queue<location> final_route;    //Route of intersections to follow
@@ -102,7 +105,6 @@ int main(){
     vector<int> nodes;
     cin>>input;
     
-    //INSERTAR FUNCION ISABEL QUE ROMPE UN STRING EN UN VECTOR DE INTS
     
     vector<string> snodes;
     snodes = splitStrings(input, '-');
@@ -159,11 +161,9 @@ int main(){
         final_route.pop();
         
     }
-    /*//cout<<"The total distance is: "<<totalDistance(final_route)<<endl;
+    //cout<<"The total distance is: "<<totalDistance(final_route)<<endl;
     cin>>fichero;
     toFile(final_route,fichero);
-    */
-    
 }
 
 queue<location> route(vector<location> &dlist,const location c)
@@ -386,7 +386,7 @@ queue<location> route(vector<location> &dlist,const location c)
     
 }
 
-/*
+
 void toFile(queue<location> r,string fichero)
 {
     fstream fout;
@@ -426,7 +426,7 @@ vector<location> FromFile(char *fichero) {
         exit(-1);
     }
 }
-*/
+
 vector<string> splitStrings(string str, char dl)
 {
     //CODE FROM https://www.geeksforgeeks.org/split-string-substrings-using-delimiter/
