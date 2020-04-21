@@ -34,8 +34,6 @@ struct location
         x=0;
         y=0;
         node=0;
-        
-
     }
 
     location(double a,double b, int node_) 
@@ -43,7 +41,6 @@ struct location
         x=a;
         y=b;
         node=node_;
-        
     }
 
     location(const location &a)
@@ -51,7 +48,6 @@ struct location
         x=a.x;
         y=a.y;
         node=a.node;
-        
     }
 };
 

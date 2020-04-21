@@ -46,57 +46,7 @@ int main(int argc, char*argv[]){
 		exit(-1);
 	}
 	vector<location> lista = FromFile(argv[1]); //All locations
-    string fichero = argv[2];
-	
-	//AQUI ESTOY METIENDO ALGO QUE HAY QUE QUITAR
-	//We have to create an array of e (edges) with coordinates
-    
-    /*
-    int size =13;
-    
-    vector<location> lista(size);
-    
-    lista[0].x=0;
-    lista[0].y=0;
-    lista[0].node=0;
-
-    int x0even=50;
-    int x0uneven=0;
-    int y0=-50;
-    int j=1;
-
-        for(int i=1;i<13;i++){
-
-            if(j%2!=0){
-            lista[i].x=x0even;
-            lista[i].y=(j-1)*y0;
-            x0even=x0even+100;
-            }
-
-            if(j%2==0){
-            lista[i].x=x0uneven;
-            lista[i].y=(j-1)*y0;
-            x0uneven=x0uneven+100;
-
-            }
-
-            lista[i].node=i;
-
-            if((i==2)||(i==5)||(i==7)||(i==10)){
-                j++;
-                x0even=50;
-                x0uneven=0;
-            }
-        };
-
-
-    for(int k=0; k<13;k++){
-
-        cout<<k<<": x: "<<lista[k].x<<", y: "<<lista[k].y<<endl;
-    };
-	//AQUI SE ACABA
-    */
-	
+    string fichero = argv[2]; //Output file
 	vector<location> mapa;  //Locations where we want to go
 	queue<location> final_route;    //Route of intersections to follow
 
@@ -104,7 +54,6 @@ int main(int argc, char*argv[]){
     string input;
     vector<int> nodes;
     cin>>input;
-    
     
     vector<string> snodes;
     snodes = splitStrings(input, '-');
@@ -114,7 +63,6 @@ int main(int argc, char*argv[]){
     for(size_t k=0;k<snodes.size();k++)
     {
         nodes.push_back(atoi(snodes.at(k).c_str()));
-        cout<<nodes.at(k)<<endl;  
     }
 
     //Filtering input data
@@ -127,7 +75,7 @@ int main(int argc, char*argv[]){
         }
     }
     
-    
+    //Creating the vector of locations to visit
     for (int i=0; i<nodes.size(); i++)
     {
         for (int j=0; j<lista.size(); j++)
@@ -137,12 +85,15 @@ int main(int argc, char*argv[]){
             
         }   
     }
+    cout<<endl;
+    cout<<"List of Delivery Locations"<<endl;
     
     for(size_t k=0;k<mapa.size();k++){
-        cout<<k<<" "<<mapa[k].x<<" "<<mapa[k].y<<endl;
+        cout<<k<<". x: "<<mapa[k].x<<", y: "<<mapa[k].y<<endl;
     }
     
-    //FIltering data
+    //Filtering data
+    cout<<endl;
     cout<<"Specify location of the origin as coord_x coord_y"<<endl;
     cout<<"Coord_x and coord_y can only have values that are multiples of 100"<<endl;
     int x,y;
@@ -153,33 +104,36 @@ int main(int argc, char*argv[]){
         exit(-1);
     }
     location origin(x,y,0);
+    cout<<endl;
     cout<<"Generating route starting by the origin: "<<origin<<"..."<<endl;
     
     final_route=route(mapa,origin);
-    /*
+    toFile(final_route,fichero);
+    cout<<endl;
+    
+    cout<<"List of nodes visited"<<endl;
+    
     while(!final_route.empty()){
-        cout<<"node: "<<final_route.front().node<<" x: "<<final_route.front().x<<" y: "<<final_route.front().y<<endl;
+        cout<<"x: "<<final_route.front().x<<", y: "<<final_route.front().y<<endl;
         final_route.pop();
         
     }
-    */
-    //cout<<"The total distance is: "<<totalDistance(final_route)<<endl;
-    toFile(final_route,fichero);
+    cout<<"List of nodes saved in "<<fichero<<" file"<<endl;
 }
 
 queue<location> route(vector<location> &dlist,const location c)
 {
     //SORTING
    
-    //VECTOR TO STORE SORTED LIST
+    //Vector to store the sorted list
     vector<location> slist;
 
-    //DEFINING THE FIRST PLACE (PIZZERIA) AS ORIGIN
+    //Defining the first place as origin (pizzeria)
     slist.push_back(c);
     
     int tamano=dlist.size();
 
-    //SORTING THE VECTOR ACCORDING TO SMALLEST DISTANCES
+    //Sorting the vector according to the smaller distances
     for(size_t j=0;j<tamano;j++){
 
         int mindist=INT_MAX;
@@ -189,81 +143,56 @@ queue<location> route(vector<location> &dlist,const location c)
         for(size_t i=0; i<dlist.size();i++){
             dist=d(slist.at(j), dlist.at(i));
 
-            if((dist<=mindist)&&(dist!=0)/*&&(dlist[i].sorted==false)*/){
+            if((dist<=mindist)&&(dist!=0)){
                 mindist=dist;
                 pos=i;
             }
             
         };
         slist.push_back(dlist.at(pos));
-        //dlist[pos].sorted=true;
         dlist.erase(dlist.begin()+pos);
     }
 
     
-    
-    //ADDING THE LAS PLACE (PIZZERIA)
+    //Adding the origin as last location
     slist.push_back(c);
     
-    //SHOWING THE SORTED LIST
-    cout<<"Sorted places"<<endl;
-    for(size_t k=0; k<slist.size();k++){
-
-        cout<<k<<": x: "<<slist[k].x<<", y: "<<slist[k].y<<" node: "<<slist[k].node<<endl;
-    };
+    //Showing the sorted locations
     cout<<endl;
-
-    
-    //BORRAR ESTO
-   /* queue<location> sq;
+    cout<<"List of delivery locations in order:"<<endl;
     for(size_t k=0; k<slist.size();k++){
 
-        sq.push(slist.at(k));
-    }
-    
-    return sq;*/
-    //HASTA AQUI
-    
-    //TRANSFORMING THE VECTOR INTO A QUEUE
-    //queue<location> squeue=toQueue(slist);
+        cout<<k<<". x: "<<slist[k].x<<", y: "<<slist[k].y<<", node: "<<slist[k].node<<endl;
+    };
 
 
     //MOVING
 
     location temp=slist.at(0);
-    //TEMPORARY MOVEMENTS IN EACH DIRECTION
+    //Temporary movements in each direction
     location tempr;
     location templ;
     location tempu;
     location tempd;
-    //squeue.pop();//Eliminating the pizzeria because we are already there
-    
-    //TEMPORARY VECTORS TO STORE THE DIFFERENT SORTED LISTS
+        
+    //Temporary vector<location>
     vector<location> vec=slist;
-    /*vector<location> vecr;
-    vector<location> vecl;
-    vector<location> vecu;
-    vector<location> vecd;
-    */
 
-    //QUEUE THAT GIVES THE FINAL ROUTE
+    //Queue that gives the final route
     queue<location> route;
+    route.push(temp);
 
-    //VALUE OF THE OBJECTIVE FUNCTIONS GOING IN DIFFERENT DIRECTIONS
+    //Value of the objective function going in different directions
     
     vector<double> obj(4); //0-right, 1- left, 2-up, 3-down
   
 
-    //WEIGHT OF TRAVERSING A STREET
+    //Weight of traversing a street
     double w=100;
+    
     int mini;
     double iterations=1;
     bool brk=false;
-
-    cout<<"ESTO ES LO QUE VALE C"<<endl;
-    cout<<"x: "<<c.x<<" y: "<<c.y<<endl;
-    //TRANSFORMING THE QUEUE BACK TO A VECTOR STARTING FROM [1]
-    //vec=toVector(aux);
     
     do{
 
@@ -295,28 +224,23 @@ queue<location> route(vector<location> &dlist,const location c)
 
         vec.at(0)=tempd;
         obj.at(3)=w*iterations+totalDistance(vec);
-
-        cout<<"Objective function going right: "<<obj.at(0)<<endl;
-        cout<<"Objective function going left: "<<obj.at(1)<<endl;
-        cout<<"Objective function going up: "<<obj.at(2)<<endl;
-        cout<<"Objective function going down: "<<obj.at(3)<<endl;
-
-        //CALCULATING THE WAY WITH THE MINIMUM OBJ. FUNCTION
+        
+        //Chosing the direction with the smallest objective function
         mini=minimum(obj);
-       cout<<"MINI VALE: "<<mini<<endl;
+       
         //SEPARATING CASES OF MOVEMENT
         
         switch(mini){
             
             case 0: //The minimum is going right
-                cout<<"entre al caso0"<<endl;
+                
                 vec.at(0)=tempr; //This again because it changed earlier
                 
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
                     //
                     vec.erase(vec.begin());
                 }
-                //WE ADD TO THE VECTOR OUT CURRENT POSITION AS FIRST
+                //We add to the vector out current position as first
                 temp.x=tempr.x+50;
                 temp.y=tempr.y;
                 vec.at(0)=temp;
@@ -324,39 +248,39 @@ queue<location> route(vector<location> &dlist,const location c)
                 break;
                 
             case 1: //The minimum is going left
-                cout<<"entre al caso1"<<endl;
+                
                 vec.at(0)=templ;
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
                     //
                     vec.erase(vec.begin());
                 }
-                //WE ADD TO THE VECTOR OUT CURRENT POSITION AS FIRST
+                //We add to the vector out current position as first
                 temp.x=templ.x-50;
                 temp.y=templ.y;
                 vec.at(0)=temp;
                 break;
                 
             case 2: //The minimum is going up
-                cout<<"entre al caso2"<<endl;
+                
                 vec.at(0)=tempu;
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
                     //
                     vec.erase(vec.begin());
                 }
-                //WE ADD TO THE VECTOR OUT CURRENT POSITION AS FIRST
+                //We add to the vector out current position as first
                 temp.x=tempu.x;
                 temp.y=tempu.y+50;
                 vec.at(0)=temp;
                 break;
                 
             case 3: //The minimum is going down
-                cout<<"entre al caso3"<<endl;
+                
                 vec.at(0)=tempd;
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
                     //
                     vec.erase(vec.begin());
                 }
-                //WE ADD TO THE VECTOR OUT CURRENT POSITION AS FIRST
+                //We add to the vector out current position as first
                 temp.x=tempd.x;
                 temp.y=tempd.y-50;
                 vec.at(0)=temp;
@@ -365,22 +289,15 @@ queue<location> route(vector<location> &dlist,const location c)
                 
         }
 
-        //ADDING OUT CURRENT POSITION TO THE FINAL ROUTE
+        //Adding our current position to the final route
         route.push(vec.at(0));
-        
-        cout<<"List of current and future locations to visit"<<endl;
-        for(size_t k=0; k<vec.size();k++){
 
-            cout<<k<<": x: "<<vec.at(k).x<<", y: "<<vec.at(k).y<<endl;
-        };
-
-        //BREAK CONDITION !!!!!!! DONT KNOW IF ITS ALWAYS RIGHT!!!!!
         if((vec.at(0).x==c.x)&&(vec.at(0).y==c.y)&&(vec.at(1).x==c.x)&&(vec.at(1).y==c.y)){
+            
             brk=true;
         }
         iterations++;
         
-        //}while(iterations<8);
     }while(brk==false);
     
     return route;
@@ -394,12 +311,13 @@ void toFile(queue<location> r,string fichero)
 	
 	fout.open(fichero.c_str());
 	if (fout) {
+        fout<<"List of nodes visited"<<endl;
 		while (!r.empty()) {
-			fout<<r.front().node<<" "<<r.front().x<<" "<<r.front().y<<endl;
+			fout<<"x: "<<r.front().x<<", y: "<<r.front().y<<endl;
 			r.pop();
 		}
 	} else
-		cerr<<"Error en la apertura del fichero\n";
+		cerr<<"Error in capturing the file\n";
 }
 
 vector<location> FromFile(char *fichero) {
@@ -423,7 +341,7 @@ vector<location> FromFile(char *fichero) {
         return v;
     }
     else{
-        cerr<<"Archivo no encontrado"<<endl;
+        cerr<<"File not found"<<endl;
         exit(-1);
     }
 }
