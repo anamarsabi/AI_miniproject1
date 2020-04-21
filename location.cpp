@@ -311,9 +311,9 @@ void toFile(queue<location> r,string fichero)
 	
 	fout.open(fichero.c_str());
 	if (fout) {
-        fout<<"List of nodes visited"<<endl;
+        
 		while (!r.empty()) {
-			fout<<"x: "<<r.front().x<<", y: "<<r.front().y<<endl;
+			fout<<r.front().x<<" "<<r.front().y<<endl;
 			r.pop();
 		}
 	} else
