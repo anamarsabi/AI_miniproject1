@@ -109,13 +109,22 @@ int main(){
     
     //Transforming from vector<string> to vector<int>
     
-    for(size_t k=0;k<snodes.size();k++){
-       
+    for(size_t k=0;k<snodes.size();k++)
+    {
         nodes.push_back(atoi(snodes.at(k).c_str()));
-       
-       cout<<nodes.at(k)<<endl;
-        
+        cout<<nodes.at(k)<<endl;  
     }
+
+    //Filtering input data
+    for(size_t k=0;k<nodes.size();k++)
+    {
+        if (nodes[k]>lista.size())
+        {
+            cerr<<"Input error. Value out of the limits of the data file"<<endl;
+            exit(-1);
+        }
+    }
+    
     
     for (int i=0; i<nodes.size(); i++)
     {
@@ -124,21 +133,24 @@ int main(){
             if (nodes[i] == lista[j].node)
                 mapa.push_back(lista[j]);
             
-        }
-        
-        
+        }   
     }
     
     for(size_t k=0;k<mapa.size();k++){
         cout<<k<<" "<<mapa[k].x<<" "<<mapa[k].y<<endl;
-        
     }
     
-    
-    cout<<"Specify location of the origin: ";
-    int n,x,y;
-    cin>>n>>x>>y;
-    location origin(x,y,n);
+    //FIltering data
+    cout<<"Specify location of the origin as coord_x coord_y"<<endl;
+    cout<<"Coord_x and coord_y can only have values that are multiples of 100"<<endl;
+    int x,y;
+    cin>>x>>y;
+    if ((x%100 != 0) || (y%100 != 0))
+    {
+        cerr<<"Input error. Not apropriate data"<<endl;
+        exit(-1);
+    }
+    location origin(x,y,0);
     cout<<"Generating route starting by the origin: "<<origin<<"..."<<endl;
     
     final_route=route(mapa,origin);
