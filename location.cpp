@@ -29,7 +29,7 @@ void toFile(queue<location> r,string fichero);
 /**
  * @brief Creates a list of locations from a given file
  */
-vector<location> FromFile(string fichero);
+vector<location> FromFile(char* fichero);
 
 /**
  * @brief Splits a string and stores it in a vector
