@@ -40,12 +40,13 @@ vector<string> splitStrings(string str, char dl);
 //{
 
 int main(int argc, char*argv[]){
-    if (argc!=2) {
+    if (argc!=3) {
 		cerr<<"Error en el número de argumentos:\n";
-		cerr<<"./location <fichero>\n";
+		cerr<<"./location <fichero_data> <fichero_salida>\n";
 		exit(-1);
 	}
 	vector<location> lista = FromFile(argv[1]); //All locations
+    string fichero = argv[2];
 	
 	//AQUI ESTOY METIENDO ALGO QUE HAY QUE QUITAR
 	//We have to create an array of e (edges) with coordinates
@@ -98,7 +99,6 @@ int main(int argc, char*argv[]){
 	
 	vector<location> mapa;  //Locations where we want to go
 	queue<location> final_route;    //Route of intersections to follow
-	string fichero;
 
     cout<<"Specify locations where to go\n Example of input: 2-5-8-14-22 enter"<<endl;
     string input;
@@ -156,13 +156,14 @@ int main(int argc, char*argv[]){
     cout<<"Generating route starting by the origin: "<<origin<<"..."<<endl;
     
     final_route=route(mapa,origin);
+    /*
     while(!final_route.empty()){
         cout<<"node: "<<final_route.front().node<<" x: "<<final_route.front().x<<" y: "<<final_route.front().y<<endl;
         final_route.pop();
         
     }
+    */
     //cout<<"The total distance is: "<<totalDistance(final_route)<<endl;
-    cin>>fichero;
     toFile(final_route,fichero);
 }
 
