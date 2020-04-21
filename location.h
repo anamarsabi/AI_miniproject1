@@ -25,7 +25,7 @@ struct location
     double x; ///< Coordinate x
     double y; ///< Coordinate y
     int node;
-    bool sorted;
+    
 	/**
 	 * @brief Constructor
 	 */
@@ -34,7 +34,7 @@ struct location
         x=0;
         y=0;
         node=0;
-        sorted=false;
+        
 
     }
 
@@ -43,7 +43,7 @@ struct location
         x=a;
         y=b;
         node=node_;
-        sorted=false;
+        
     }
 
     location(const location &a)
@@ -51,7 +51,7 @@ struct location
         x=a.x;
         y=a.y;
         node=a.node;
-        sorted=a.sorted;
+        
     }
 };
 
@@ -81,20 +81,9 @@ double d(location a, location b);
 double totalDistance(vector<location> &v);
 
 /**
- * @brief Adds all the elements of the vector passed aas a parameter to a queue
+ * @brief Finds the minimum in a vector 
  */
-queue<location> toQueue(vector<location> &v);
-
-/**
- * @brief Adds all the elements of the queue passed as a parameter to a vector
- *          starting from index 1
- */
-vector<location> toVector(queue<location> &v);
-
-/**
- * @brief Finds the minimum of 4 elements
- */
-double minimum(double a, double b, double c, double d);
+int minimum(vector<double> &v);
 
 
 //IMPLEMENTATION
@@ -136,30 +125,6 @@ double totalDistance(vector<location> &v)
 
     }
     return sum;
-}
-
-queue<location> toQueue(vector<location> &v)
-{
-    queue<location> r;
-    for(size_t k=0; k<v.size();k++)
-    {
-
-        r.push(v[k]);
-    };
-    return r;
-}
-
-vector<location> toVector(queue<location> &v)
-{
-    vector<location> aux(v.size()+1);
-    int k=1;
-    while(!v.empty())
-    {
-        aux[k]=v.front();
-        v.pop();
-        k++;
-    }
-    return aux;
 }
 
 int minimum(vector<double> &v)
