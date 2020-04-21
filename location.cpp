@@ -244,9 +244,11 @@ queue<location> route(vector<location> &dlist,const location c)
     //WEIGHT OF TRAVERSING A STREET
     double w=100;
     int mini;
-    int iterations=1;
+    double iterations=1;
     bool brk=false;
 
+    cout<<"ESTO ES LO QUE VALE C"<<endl;
+    cout<<"x: "<<c.x<<" y: "<<c.y<<endl;
     //TRANSFORMING THE QUEUE BACK TO A VECTOR STARTING FROM [1]
     //vec=toVector(aux);
     
@@ -288,12 +290,13 @@ queue<location> route(vector<location> &dlist,const location c)
 
         //CALCULATING THE WAY WITH THE MINIMUM OBJ. FUNCTION
         mini=minimum(obj);
-       
+       cout<<"MINI VALE: "<<mini<<endl;
         //SEPARATING CASES OF MOVEMENT
         
         switch(mini){
             
             case 0: //The minimum is going right
+                cout<<"entre al caso0"<<endl;
                 vec.at(0)=tempr; //This again because it changed earlier
                 
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
@@ -308,6 +311,7 @@ queue<location> route(vector<location> &dlist,const location c)
                 break;
                 
             case 1: //The minimum is going left
+                cout<<"entre al caso1"<<endl;
                 vec.at(0)=templ;
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
                     //
@@ -320,6 +324,7 @@ queue<location> route(vector<location> &dlist,const location c)
                 break;
                 
             case 2: //The minimum is going up
+                cout<<"entre al caso2"<<endl;
                 vec.at(0)=tempu;
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
                     //
@@ -332,6 +337,7 @@ queue<location> route(vector<location> &dlist,const location c)
                 break;
                 
             case 3: //The minimum is going down
+                cout<<"entre al caso3"<<endl;
                 vec.at(0)=tempd;
                 if((vec.at(0).x==vec.at(1).x)&&(vec.at(0).y==vec.at(1).y)){
                     //
@@ -346,14 +352,14 @@ queue<location> route(vector<location> &dlist,const location c)
                 
         }
 
+        //ADDING OUT CURRENT POSITION TO THE FINAL ROUTE
+        route.push(vec.at(0));
+        
         cout<<"List of current and future locations to visit"<<endl;
         for(size_t k=0; k<vec.size();k++){
 
             cout<<k<<": x: "<<vec.at(k).x<<", y: "<<vec.at(k).y<<endl;
         };
-
-        //ADDING OUT CURRENT POSITION TO THE FINAL ROUTE
-        route.push(vec.at(0));
 
         //BREAK CONDITION !!!!!!! DONT KNOW IF ITS ALWAYS RIGHT!!!!!
         if((vec.at(0).x==c.x)&&(vec.at(0).y==c.y)&&(vec.at(1).x==c.x)&&(vec.at(1).y==c.y)){

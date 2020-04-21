@@ -165,7 +165,7 @@ vector<location> toVector(queue<location> &v)
 int minimum(vector<double> &v)
 {
     double mini=v.at(0);
-    int pos;
+    int pos=0;
     
     for(int i=1; i<v.size();i++){
     
