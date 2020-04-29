@@ -11,11 +11,19 @@ Isabel Carnoto and Ana Martínez
 For a graph describing the street network of a given city, develop a route mapping method for
 pizza delivery.
 Input:
-- filele with a graph describing the city map
-- he node in which the pizzeria is, vp
-- list of edges to which the pizzas need to be delivered z(, … , z9 (we assume that the supplier of needs to visit each of these).
+- File with a graph describing the city map
+- The node in which the pizzeria is, vp
+- List of edges to which the pizzas need to be delivered z(, … , z9 (we assume that the supplier of needs to visit each of these).
 Output: the supplier's route in the form of a list of vertices to visit, which begins and ends at node vp
 
-To deliver the pizzas in the corresponding edges and go back to the pizzeria having traversed the minimum distance possible.
-The output will be a list of the vertices visited in the optimized order for going through the pizza
-delivery locations.
+## To compile
+Just use the comand make
+
+## To execute (the example from the first project submission)
+
+bin/./location data/dataImage outputFiles/outputImage
+
+Introduce a list of edges using the following format: number-number-number... For example: 3-4-7-9
+Introduce the origin using the following format: number number. For example: 0 100 
+Remember the origins coordinates should be multiples of 100.
+
